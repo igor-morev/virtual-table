@@ -1,0 +1,25 @@
+:host {
+    padding: 2rem;
+    overflow-y: auto;
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; 
+    th {
+        font-weight: bold;
+        color: white;
+        background: tomato;
+    }   
+    th, td {
+        padding: 1rem;
+        border: 1px solid;
+    }
+}
+
+.example-viewport {
+    height: 500px;
+    width: 100%;
+    border: 1px solid black;
+  }

@@ -1,0 +1,18 @@
+<cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+            
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let column of columns">{{column}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+
+            <tr *cdkVirtualFor="let item of data">
+                <td *ngFor="let el of item">{{el}}</td>
+            </tr>
+        </tbody>
+    </table>
+</cdk-virtual-scroll-viewport>
