@@ -1,25 +1,91 @@
 :host {
-    padding: 2rem;
-    overflow-y: auto;
-    display: block;
+  display: block;
+  padding: 2rem 2rem 0;
+}
+
+.viewport {
+  overflow: hidden auto;
+  display: block;
+  height: 400px;
+  position: relative;
+  display: flex;
+}
+
+.header {
+  display: flex;
+}
+
+.main-header {
+  overflow: hidden scroll;
+}
+
+.body {
+  overflow: hidden;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse; 
-    th {
-        font-weight: bold;
-        color: white;
-        background: tomato;
-    }   
-    th, td {
-        padding: 1rem;
-        border: 1px solid;
-    }
+  border-collapse: collapse;
+  table-layout: fixed;
+  th {
+    font-weight: bold;
+    color: white;
+    background: tomato;
+    position: sticky;
+    top: 0;
+    width: 100px;
+    min-width: 100px;
+    padding: 0 4px;
+    box-sizing: border-box;
+  }
+  th,
+  td {
+    padding: 1rem;
+    border: 1px solid;
+  }
+
+  td {
+    height: 40px;
+    box-sizing: border-box;
+    padding: 0 4px;
+  }
+}
+
+.table-wrapper {
+  top: 0;
+  left: 0;
 }
 
 .example-viewport {
-    height: 500px;
-    width: 100%;
-    border: 1px solid black;
-  }
+  width: 100%;
+  border: 1px solid black;
+}
+
+.spacer {
+  overflow: hidden;
+}
+
+.left-track {
+  height: 20px;
+}
+
+.main-track {
+  flex: 1;
+  overflow: scroll hidden;
+
+}
+
+.virtual-track {
+  display: flex;
+  height: 20px;
+  background: ghostwhite;
+
+
+}
+
+.viewport-inner {
+  display: flex;
+}
+
+.track-spacer {
+  height: 20px;
+}

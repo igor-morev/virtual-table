@@ -8,9 +8,8 @@ describe('LongTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LongTableComponent ]
-    })
-    .compileComponents();
+      declarations: [LongTableComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LongTableComponent);
     component = fixture.componentInstance;

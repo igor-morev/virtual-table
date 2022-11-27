@@ -6,10 +6,14 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "npx eslint 'src/**/*.{js,jsx,ts,tsx,html,css,scss}' --quiet --fix",
+    "format": "npx prettier 'src/**/*.{js,jsx,ts,tsx,html,css,scss}' --write",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "@angular-eslint/schematics": "^1.2.0",
     "@angular/animations": "^14.2.0",
     "@angular/cdk": "^14.2.7",
     "@angular/common": "^14.2.0",
@@ -34,6 +38,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "prettier": "^2.8.0",
     "typescript": "~4.7.2"
   }
 }

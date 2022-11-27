@@ -1,14 +1,14 @@
-<div class="header">
+<!-- <div class="header">
   <div class="left-pinned-header">
     <table>
       <col
         *ngFor="let column of leftPinnedColumns"
-        [style.width.px]="column.width"
-        [style.minWidth.px]="column.width" />
+        [style.width.px]="nodeWidth"
+        [style.minWidth.px]="nodeWidth" />
 
       <thead>
         <tr>
-          <th *ngFor="let column of leftPinnedColumns">{{ column.name }}</th>
+          <th *ngFor="let column of leftPinnedColumns">{{ column }}</th>
         </tr>
       </thead>
     </table>
@@ -22,13 +22,13 @@
         <table>
           <col
             *ngFor="let column of visibleColumnsChildren"
-            [style.width.px]="column.width"
-            [style.minWidth.px]="column.width" />
+            [style.width.px]="nodeWidth"
+            [style.minWidth.px]="nodeWidth" />
 
           <thead>
             <tr>
               <th *ngFor="let column of visibleColumnsChildren">
-                {{ column.name }}
+                {{ column }}
               </th>
             </tr>
           </thead>
@@ -47,13 +47,13 @@
         <table>
           <col
             *ngFor="let column of leftPinnedColumns"
-            [style.width.px]="column.width"
-            [style.minWidth.px]="column.width" />
+            [style.width.px]="nodeWidth"
+            [style.minWidth.px]="nodeWidth" />
 
           <tbody>
             <tr *ngFor="let item of visibleDataChildren; let rowIndex = index">
               <td *ngFor="let el of leftPinnedColumns; let colIndex = index">
-                {{ el.name }}-{{ item }}
+                {{ el }}-{{ item }}
               </td>
             </tr>
           </tbody>
@@ -72,14 +72,14 @@
         <table>
           <col
             *ngFor="let column of visibleColumnsChildren"
-            [style.width.px]="column.width"
-            [style.minWidth.px]="column.width" />
+            [style.width.px]="nodeWidth"
+            [style.minWidth.px]="nodeWidth" />
 
           <tbody>
             <tr *ngFor="let item of visibleDataChildren; let rowIndex = index">
               <td
                 *ngFor="let el of visibleColumnsChildren; let colIndex = index">
-                {{ el.name }}-{{ item }}
+                {{ el }}-{{ item }}
               </td>
             </tr>
           </tbody>
@@ -94,17 +94,4 @@
   <div class="main-track" #track>
     <div class="track-spacer" [style.width.px]="totalContentWidth"></div>
   </div>
-</div>
-
-<!-- 
-<virtual-table fixedCols cols rows nodeBuffer #virtualTable>
-  <table>
-    <thead>
-      th
-    </thead>
-    <tbody>
-      tr
-        td
-    </tbody>
-  </table>
-</virtual-table> -->
+</div> -->
