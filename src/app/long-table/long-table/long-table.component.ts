@@ -136,7 +136,7 @@ export class LongTableComponent implements OnInit {
 
   ngAfterViewInit() {
     this.virtualizeColumns({
-      target: this.viewport.nativeElement,
+      target: this.body.nativeElement,
     });
 
     this.virtualizeRows({
@@ -151,21 +151,23 @@ export class LongTableComponent implements OnInit {
     });
 
     fromEvent<{ target: HTMLDivElement }>(
-      this.track.nativeElement,
+      this.body.nativeElement,
       'scroll'
     ).subscribe(event => {
       this.virtualizeColumns(event);
+    });
 
+    fromEvent<{ target: HTMLDivElement }>(
+      this.track.nativeElement,
+      'scroll'
+    ).subscribe(event => {
       this.header.nativeElement.scrollLeft = event.target.scrollLeft;
       this.body.nativeElement.scrollLeft = event.target.scrollLeft;
     });
 
     fromEvent<WheelEvent>(window, 'wheel').subscribe(event => {
-      // console.log(event);
-
       // if (this.body.nativeElement === document.activeElement) {
       //   this.track.nativeElement.scrollLeft = this.track.nativeElement.scrollLeft + event.deltaX;
-
       // }
 
       this.track.nativeElement.scrollLeft =
