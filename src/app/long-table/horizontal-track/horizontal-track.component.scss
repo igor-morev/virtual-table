@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  height: 20px;
+  background: ghostwhite;
+}
+
+.left-content {
+  height: 20px;
+}
+
+.right-content {
+  flex: 1;
+  overflow: scroll hidden;
+}
+
+.spacer {
+  height: 20px;
+}

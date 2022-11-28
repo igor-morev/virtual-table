@@ -1,100 +1,120 @@
-<div class="header">
-  <div class="left-pinned-header">
-    <table>
-      <col
-        *ngFor="let column of leftPinnedColumns"
-        [style.width.px]="column.width"
-        [style.minWidth.px]="column.width" />
+<app-virtual-table
+  [columns]="mainColumns"
+  [rows]="data"
+  [rowHeight]="40"
+  [viewportY]="viewport"
+  [viewportX]="body"
+  #vTable="vTable">
+  <div class="header">
+    <div class="left-pinned-header">
+      <table>
+        <ng-container
+          *ngTemplateOutlet="
+            tHead;
+            context: { $implicit: leftPinnedColumns }
+          "></ng-container>
+      </table>
+    </div>
 
-      <thead>
-        <tr>
-          <th *ngFor="let column of leftPinnedColumns">{{ column.name }}</th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-
-  <div #header class="main-header">
-    <div class="spacer" [style.width.px]="totalContentWidth">
-      <div
-        class="virtual-table"
-        [style.transform]="'translateX(' + offsetX + 'px)'">
+    <div #header class="main-header">
+      <app-virtual-segment [width]="totalContentWidth" [x]="vTable.offsetX">
         <table>
-          <col
-            *ngFor="let column of visibleColumnsChildren"
-            [style.width.px]="column.width"
-            [style.minWidth.px]="column.width" />
-
-          <thead>
-            <tr>
-              <th *ngFor="let column of visibleColumnsChildren">
-                {{ column.name }}
-              </th>
-            </tr>
-          </thead>
+          <ng-container
+            *ngTemplateOutlet="
+              tHead;
+              context: { $implicit: vTable.virtualColumns }
+            "></ng-container>
         </table>
-      </div>
+      </app-virtual-segment>
     </div>
   </div>
-</div>
 
-<div class="viewport" #viewport>
-  <div class="row-header">
-    <div class="spacer" [style.height.px]="totalContentHeight">
-      <div
-        class="virtual-table"
-        [style.transform]="'translate(' + 0 + 'px, ' + offsetY + 'px)'">
+  <div class="viewport" #viewport>
+    <div class="row-header">
+      <app-virtual-segment [height]="totalContentHeight" [y]="vTable.offsetY">
         <table>
-          <col
-            *ngFor="let column of leftPinnedColumns"
-            [style.width.px]="column.width"
-            [style.minWidth.px]="column.width" />
+          <ng-container
+            *ngTemplateOutlet="
+              colGroup;
+              context: { $implicit: leftPinnedColumns }
+            "></ng-container>
 
-          <tbody>
-            <tr *ngFor="let item of visibleDataChildren; let rowIndex = index">
-              <td *ngFor="let el of leftPinnedColumns; let colIndex = index">
-                {{ el.name }}-{{ item }}
-              </td>
-            </tr>
-          </tbody>
+          <ng-container
+            *ngTemplateOutlet="
+              tBody;
+              context: {
+                columns: leftPinnedColumns,
+                rows: vTable.virtualRows
+              }
+            "></ng-container>
         </table>
-      </div>
+      </app-virtual-segment>
+    </div>
+    <div class="body" #body [style.height.px]="totalContentHeight" tabindex="0">
+      <app-virtual-segment
+        [height]="totalContentHeight"
+        [width]="totalContentWidth"
+        [x]="vTable.offsetX"
+        [y]="vTable.offsetY">
+        <table>
+          <ng-container
+            *ngTemplateOutlet="
+              colGroup;
+              context: { $implicit: vTable.virtualColumns }
+            "></ng-container>
+
+          <ng-container
+            *ngTemplateOutlet="
+              tBody;
+              context: {
+                columns: vTable.virtualColumns,
+                rows: vTable.virtualRows
+              }
+            "></ng-container>
+        </table>
+      </app-virtual-segment>
     </div>
   </div>
-  <div class="body" #body [style.height.px]="totalContentHeight">
-    <div
-      class="spacer"
-      [style.height.px]="totalContentHeight"
-      [style.width.px]="totalContentWidth">
-      <div
-        class="virtual-table"
-        [style.transform]="'translate(' + offsetX + 'px, ' + offsetY + 'px)'">
-        <table>
-          <col
-            *ngFor="let column of visibleColumnsChildren"
-            [style.width.px]="column.width"
-            [style.minWidth.px]="column.width" />
 
-          <tbody>
-            <tr *ngFor="let item of visibleDataChildren; let rowIndex = index">
-              <td
-                *ngFor="let el of visibleColumnsChildren; let colIndex = index">
-                {{ el.name }}-{{ item }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+  <app-horizontal-track
+    [header]="header"
+    [body]="body"
+    [contentWidth]="totalContentWidth"
+    [offset]="leftContentWidth"></app-horizontal-track>
+</app-virtual-table>
 
-<div class="virtual-track">
-  <div class="left-track" [style.width.px]="leftContentWidth"></div>
-  <div class="main-track" #track>
-    <div class="track-spacer" [style.width.px]="totalContentWidth"></div>
-  </div>
-</div>
+<ng-template #tHead let-columns>
+  <ng-container
+    *ngTemplateOutlet="
+      colGroup;
+      context: { $implicit: columns }
+    "></ng-container>
+
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns">
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+</ng-template>
+
+<ng-template #colGroup let-columns>
+  <col
+    *ngFor="let column of columns"
+    [style.width.px]="column.width"
+    [style.minWidth.px]="column.width" />
+</ng-template>
+
+<ng-template #tBody let-columns="columns" let-rows="rows">
+  <tbody>
+    <tr *ngFor="let item of rows; let rowIndex = index">
+      <td *ngFor="let el of columns; let colIndex = index">
+        {{ el.name }}-{{ item }}
+      </td>
+    </tr>
+  </tbody>
+</ng-template>
 
 <!-- <virtual-table cols rows nodeBufferX nodeBufferY rowHeight viewportX viewportY #vTable>
   allContent

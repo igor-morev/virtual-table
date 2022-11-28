@@ -21,6 +21,7 @@
 
 .body {
   overflow: hidden;
+  position: relative;
 }
 
 table {
@@ -48,44 +49,4 @@ table {
     box-sizing: border-box;
     padding: 0 4px;
   }
-}
-
-.table-wrapper {
-  top: 0;
-  left: 0;
-}
-
-.example-viewport {
-  width: 100%;
-  border: 1px solid black;
-}
-
-.spacer {
-  overflow: hidden;
-}
-
-.left-track {
-  height: 20px;
-}
-
-.main-track {
-  flex: 1;
-  overflow: scroll hidden;
-
-}
-
-.virtual-track {
-  display: flex;
-  height: 20px;
-  background: ghostwhite;
-
-
-}
-
-.viewport-inner {
-  display: flex;
-}
-
-.track-spacer {
-  height: 20px;
 }
