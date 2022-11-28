@@ -3,6 +3,12 @@ import { fromEvent } from 'rxjs';
 import { Column } from '../models/table';
 import { findStartNode, findEndNode } from '../utils/virtual-table';
 
+/**
+ * Sources
+ * https://dev.to/adamklein/build-your-own-virtual-scroll-part-i-11ib
+  https://dev.to/adamklein/build-your-own-virtual-scroll-part-ii-3j86
+ */
+
 @Component({
   selector: 'app-virtual-table',
   templateUrl: './virtual-table.component.html',

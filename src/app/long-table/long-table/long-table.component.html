@@ -1,6 +1,12 @@
+<p>
+  <span>Virtual table</span>
+  <span>Cols: {{ columns.length }}</span
+  ><span>Rows: {{ rows.length }}</span>
+</p>
+
 <app-virtual-table
   [columns]="mainColumns"
-  [rows]="data"
+  [rows]="rows"
   [rowHeight]="40"
   [viewportY]="viewport"
   [viewportX]="body"

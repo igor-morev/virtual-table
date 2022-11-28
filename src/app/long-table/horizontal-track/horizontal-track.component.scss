@@ -1,11 +1,13 @@
+$height: 1rem;
+
 :host {
   display: flex;
-  height: 20px;
+  height: $height;
   background: ghostwhite;
 }
 
 .left-content {
-  height: 20px;
+  height: $height;
 }
 
 .right-content {
@@ -14,5 +16,5 @@
 }
 
 .spacer {
-  height: 20px;
+  height: $height;
 }

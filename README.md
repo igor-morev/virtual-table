@@ -1,6 +1,16 @@
-# LongTable
+# Virtual table (Cols & Rows)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.9.
+
+## Sources
+
+https://dev.to/adamklein/build-your-own-virtual-scroll-part-i-11ib
+https://dev.to/adamklein/build-your-own-virtual-scroll-part-ii-3j86
+
+## Inspired of
+
+https://ej2.syncfusion.com/angular/documentation/spreadsheet/freeze-pane/
+https://www.ag-grid.com/
 
 ## Development server
 

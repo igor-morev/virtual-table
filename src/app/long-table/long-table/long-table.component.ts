@@ -10,7 +10,7 @@ import { Column } from '../../virtual-table/models/table';
 export class LongTableComponent implements OnInit {
   columns: Column[] = Array.from({ length: 500 }, (v, k) => {
     return {
-      name: `Колонка ${k + 1}`,
+      name: `Col ${k + 1}`,
       left: 0,
       width: Math.floor(Math.random() * 150 + 150),
       colIndex: k,
@@ -23,14 +23,14 @@ export class LongTableComponent implements OnInit {
   visibleColumnsChildren: any[] = [];
   visibleDataChildren: any[] = [];
 
-  data = Array.from({ length: 1000 }, (v, k) => `Строка ${k + 1}`);
+  rows = Array.from({ length: 1000 }, (v, k) => `Row ${k + 1}`);
 
   rowHeight = 40;
 
   leftContentWidth = 0;
   totalContentWidth = 0;
 
-  totalContentHeight = this.data.length * this.rowHeight;
+  totalContentHeight = this.rows.length * this.rowHeight;
 
   constructor() {
     this.leftPinnedColumns = this.leftPinnedColumns.map((column, i) => {

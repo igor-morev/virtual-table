@@ -1,6 +1,13 @@
 :host {
   display: block;
   padding: 2rem 2rem 0;
+  font-size: 14px;
+}
+
+p {
+  span {
+    margin-right: 0.5rem;
+  }
 }
 
 .viewport {
@@ -28,25 +35,31 @@ table {
   border-collapse: collapse;
   table-layout: fixed;
   th {
-    font-weight: bold;
+    font-weight: normal;
     color: white;
-    background: tomato;
-    position: sticky;
-    top: 0;
+    background: #1f1f1f;
     width: 100px;
     min-width: 100px;
-    padding: 0 4px;
-    box-sizing: border-box;
+    height: 30px;
+    text-align: left;
   }
   th,
   td {
-    padding: 1rem;
-    border: 1px solid;
+    border: 1px solid #2a2a2a;
+    padding: 0 8px;
   }
 
   td {
     height: 40px;
-    box-sizing: border-box;
-    padding: 0 4px;
+    background-color: #141414;
+    color: white;
+  }
+}
+
+.row-header {
+  table {
+    td {
+      background-color: #1f1f1f;
+    }
   }
 }
