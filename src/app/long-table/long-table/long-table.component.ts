@@ -76,7 +76,7 @@ export class LongTableComponent implements OnInit {
   @ViewChild('body') body: ElementRef<HTMLDivElement>;
   @ViewChild('track') track: ElementRef<HTMLDivElement>;
 
-  columns: Column[] = Array.from({ length: 100 }, (v, k) => {
+  columns: Column[] = Array.from({ length: 500 }, (v, k) => {
     return {
       name: `Колонка ${k + 1}`,
       left: 0,
@@ -91,7 +91,7 @@ export class LongTableComponent implements OnInit {
   visibleColumnsChildren: any[] = [];
   visibleDataChildren: any[] = [];
 
-  data = Array.from({ length: 100 }, (v, k) => `Строка ${k + 1}`);
+  data = Array.from({ length: 1000 }, (v, k) => `Строка ${k + 1}`);
 
   nodeXPadding = 10;
   nodeYPadding = 10;
