@@ -1,6 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ContentChild,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { Column } from '../models/table';
+import { HorizontalViewportDirective } from '../directives/horizontal-viewport.directive';
+import { VerticalViewportDirective } from '../directives/vertical-viewport.directive';
+import { Column, Row } from '../models/table';
 import { findStartNode, findEndNode } from '../utils/virtual-table';
 
 /**
@@ -15,55 +23,55 @@ import { findStartNode, findEndNode } from '../utils/virtual-table';
   styleUrls: ['./virtual-table.component.scss'],
   exportAs: 'vTable',
 })
-export class VirtualTableComponent implements OnInit {
+export class VirtualTableComponent {
   @Input() columns: Column[];
-  @Input() rows: any[];
+  @Input() rows: Row[];
 
   @Input() rowHeight: number;
 
-  // TODO: возможно заменить на ContentChild через директивы
-  @Input() viewportY: HTMLDivElement;
-  @Input() viewportX: HTMLDivElement;
-
   @Input() nodeBufferY = 10;
-  @Input() nodeBufferX = 10;
+  @Input() nodeBufferX = 30;
 
-  virtualRows: any[];
-  virtualColumns: any[];
+  virtualColumns: Column[];
+  virtualRows: Row[];
 
   offsetY = 0;
   offsetX = 0;
 
-  constructor() {}
+  @ContentChild(HorizontalViewportDirective, { read: ElementRef })
+  viewportX: ElementRef<HTMLDivElement>;
 
-  ngOnInit(): void {}
+  @ContentChild(VerticalViewportDirective, { read: ElementRef })
+  viewportY: ElementRef<HTMLDivElement>;
 
   ngAfterContentInit() {
     this.virtualizeColumns(
       {
-        target: this.viewportX,
+        target: this.viewportX.nativeElement,
       },
       this.columns
     );
 
     this.virtualizeRows(
       {
-        target: this.viewportY,
+        target: this.viewportY.nativeElement,
       },
       this.rows
     );
 
-    fromEvent<{ target: HTMLDivElement }>(this.viewportY, 'scroll').subscribe(
-      event => {
-        this.virtualizeRows(event, this.rows);
-      }
-    );
+    fromEvent<{ target: HTMLDivElement }>(
+      this.viewportY.nativeElement,
+      'scroll'
+    ).subscribe(event => {
+      this.virtualizeRows(event, this.rows);
+    });
 
-    fromEvent<{ target: HTMLDivElement }>(this.viewportX, 'scroll').subscribe(
-      event => {
-        this.virtualizeColumns(event, this.columns);
-      }
-    );
+    fromEvent<{ target: HTMLDivElement }>(
+      this.viewportX.nativeElement,
+      'scroll'
+    ).subscribe(event => {
+      this.virtualizeColumns(event, this.columns);
+    });
   }
 
   virtualizeColumns(event: { target: HTMLDivElement }, columns: Column[]) {
@@ -105,7 +113,7 @@ export class VirtualTableComponent implements OnInit {
     startNode = Math.max(0, startNode);
 
     let visibleNodesCount =
-      Math.ceil(this.viewportY.clientHeight / this.rowHeight) +
+      Math.ceil(this.viewportY.nativeElement.clientHeight / this.rowHeight) +
       2 * this.nodeBufferY;
 
     visibleNodesCount = Math.min(rows.length - startNode, visibleNodesCount);

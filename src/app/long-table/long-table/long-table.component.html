@@ -5,11 +5,10 @@
 </p>
 
 <app-virtual-table
+  tabindex="0"
   [columns]="mainColumns"
   [rows]="rows"
-  [rowHeight]="40"
-  [viewportY]="viewport"
-  [viewportX]="body"
+  [rowHeight]="rowHeight"
   #vTable="vTable">
   <div class="header">
     <div class="left-pinned-header">
@@ -35,7 +34,7 @@
     </div>
   </div>
 
-  <div class="viewport" #viewport>
+  <div class="viewport" #viewport appVerticalViewport>
     <div class="row-header">
       <app-virtual-segment [height]="totalContentHeight" [y]="vTable.offsetY">
         <table>
@@ -56,7 +55,11 @@
         </table>
       </app-virtual-segment>
     </div>
-    <div class="body" #body [style.height.px]="totalContentHeight" tabindex="0">
+    <div
+      class="body"
+      #body
+      [style.height.px]="totalContentHeight"
+      appHorizontalViewport>
       <app-virtual-segment
         [height]="totalContentHeight"
         [width]="totalContentWidth"
@@ -114,9 +117,9 @@
 
 <ng-template #tBody let-columns="columns" let-rows="rows">
   <tbody>
-    <tr *ngFor="let item of rows; let rowIndex = index">
-      <td *ngFor="let el of columns; let colIndex = index">
-        {{ el.name }}-{{ item }}
+    <tr *ngFor="let row of rows; let rowIndex = index">
+      <td *ngFor="let column of columns; let colIndex = index">
+        {{ column.name }}-{{ row[column.colIndex] }}
       </td>
     </tr>
   </tbody>

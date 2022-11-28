@@ -1,31 +1,36 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { Column } from '../../virtual-table/models/table';
+import { Component } from '@angular/core';
+import { Column, Row } from '../../virtual-table/models/table';
 
 @Component({
   selector: 'app-long-table',
   templateUrl: './long-table.component.html',
   styleUrls: ['./long-table.component.scss'],
 })
-export class LongTableComponent implements OnInit {
+export class LongTableComponent {
+  readonly rowHeight = 40;
+
   columns: Column[] = Array.from({ length: 500 }, (v, k) => {
     return {
+      id: Math.random(),
       name: `Col ${k + 1}`,
       left: 0,
       width: Math.floor(Math.random() * 150 + 150),
       colIndex: k,
-    };
+    } as Column;
+  });
+
+  rows: Row[] = Array.from({ length: 1000 }, (v, k) => {
+    const row = {} as Row;
+
+    this.columns.forEach(column => {
+      row[column.colIndex] = `Row ${k + 1}`;
+    });
+
+    return row;
   });
 
   leftPinnedColumns: Column[] = this.columns.slice(0, 2);
   mainColumns: Column[] = this.columns.slice(2, this.columns.length);
-
-  visibleColumnsChildren: any[] = [];
-  visibleDataChildren: any[] = [];
-
-  rows = Array.from({ length: 1000 }, (v, k) => `Row ${k + 1}`);
-
-  rowHeight = 40;
 
   leftContentWidth = 0;
   totalContentWidth = 0;
@@ -55,8 +60,4 @@ export class LongTableComponent implements OnInit {
       this.mainColumns[this.mainColumns.length - 1].left +
       this.mainColumns[this.mainColumns.length - 1].width;
   }
-
-  ngOnInit(): void {}
-
-  ngAfterViewInit() {}
 }
